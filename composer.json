@@ -3,7 +3,7 @@
   "description" : "CoolMS2 Authorization Module",
   "version" : "0.1.0",
   "type" : "library",
-  "keywords" : [ "zf2", "coolms", "coolms2", "acl" ],
+  "keywords" : [ "zf2", "coolms", "coolms2", "athorization" ],
   "homepage" : "https://github.com/coolms/authorization",
   "license" : "BSD-3-Clause",
   "authors" : [ {
