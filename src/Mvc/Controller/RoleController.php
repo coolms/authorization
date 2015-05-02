@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * CoolMS2 Authorization Module (http://www.coolms.com/)
  *
@@ -8,17 +8,14 @@
  * @author    Dmitry Popov <d.popov@altgraphic.com>
  */
 
-namespace CmsAuthorization\Entity\Repository;
+namespace CmsAuthorization\Mvc\Controller;
 
-use CmsDoctrineORM\Mapping\Common\Repository\EntityRepository;
+use Zend\Mvc\Controller\AbstractActionController;
 
-/**
- * RoleRepository
- *
- * Repository class to extend Doctrine ORM functions with your own
- * using DQL language.
- */
-class RoleRepository extends EntityRepository
+class RoleController extends AbstractActionController
 {
-    
+    public function indexAction()
+    {
+        return [];
+    }
 }

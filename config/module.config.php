@@ -36,36 +36,20 @@ return [
                 ],
             ],
         ],
-        'role_class' => 'CmsAuthorization\Entity\Role',
         'role_providers' => [
             'CmsPermissions\Role\ProviderInterface' => [],
         ],
     ],
     'controllers' => [
+        'aliases' => [
+            'CmsAuthorization\Controller\Admin' => 'CmsAuthorization\Mvc\Controller\AdminController',
+            'CmsAuthorization\Controller\Role' => 'CmsAuthorization\Mvc\Controller\RoleController',
+        ],
         'invokables' => [
-            'CmsAuthorization\Controller\Admin' => 'CmsAuthorization\Controller\AdminController',
-            'CmsAuthorization\Controller\Role'  => 'CmsAuthorization\Controller\RoleController',
-        ],
-    ],
-    'doctrine' => [
-        'driver' => [
-            'cmsauthorization_metadata_driver' => [
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'array',
-                'paths' => __DIR__ . '/../src/Entity',
-            ],
-            'orm_default' => [
-                'drivers' => [
-                    'CmsAuthorization\Entity' => 'cmsauthorization_metadata_driver',
-                ],
-            ],
-        ],
-        'entity_resolver' => [
-            'orm_default' => [
-                'resolvers' => [
-                    'CmsAuthorization\Mapping\RoleInterface' => 'CmsAuthorization\Entity\Role',
-                ],
-            ],
+            'CmsAuthorization\Mvc\Controller\AdminController'
+                => 'CmsAuthorization\Mvc\Controller\AdminController',
+            'CmsAuthorization\Mvc\Controller\RoleController'
+                => 'CmsAuthorization\Mvc\Controller\RoleController',
         ],
     ],
     'router' => [
@@ -153,15 +137,15 @@ return [
     'translator' => [
         'translation_file_patterns' => [
             [
-                'type'          => 'gettext',
-                'base_dir'      => __DIR__ . '/../language',
-                'pattern'       => '%s.mo',
-                'text_domain'   => __NAMESPACE__,
+                'type' => 'gettext',
+                'base_dir' => __DIR__ . '/../language',
+                'pattern' => '%s.mo',
+                'text_domain' => __NAMESPACE__,
             ],
             [
-                'type'          => 'phpArray',
-                'base_dir'      => __DIR__ . '/../language',
-                'pattern'       => '%s.php',
+                'type' => 'phpArray',
+                'base_dir' => __DIR__ . '/../language',
+                'pattern' => '%s.php',
             ],
         ],
     ],

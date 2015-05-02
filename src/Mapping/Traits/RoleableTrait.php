@@ -22,29 +22,16 @@ trait RoleableTrait
     /**
      * @var RoleInterface[]
      *
-     * @ORM\ManyToMany(targetEntity="CmsAuthorization\Mapping\RoleInterface",
-     *      orphanRemoval=true,
-     *      cascade={"persist","remove"},
-     *      fetch="EXTRA_LAZY")
-     * @ORM\JoinTable(name="user_roles",
-     *      inverseJoinColumns={@ORM\JoinColumn(name="role_id",onDelete="CASCADE")})
-     * @Form\Exclude()
      * @Form\Type("ObjectSelect")
      * @Form\Attributes({"multiple":true})
      * @Form\Options({
      *      "empty_option":"User Role",
      *      "target_class":"CmsAuthorization\Mapping\RoleInterface",
      *      "property":"name",
-     *      "is_method":true,
-     *      "find_method":{
-     *          "name":"notExisitng",
-     *          "params":{
-     *              "criteria":{"id":"1"},
-     *              "orderBy":{"id":"DESC"}
-     *          }
-     *      }})
+     *      "is_method":false,
+     *      })
      */
-    protected $roles;
+    protected $roles = [];
 
     /**
      * __construct

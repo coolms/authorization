@@ -8,11 +8,11 @@
  * @author    Dmitry Popov <d.popov@altgraphic.com>
  */
 
-namespace CmsAuthorization\Controller;
+namespace CmsAuthorization\Mvc\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 
-class RoleController extends AbstractActionController
+class AdminController extends AbstractActionController
 {
     public function indexAction()
     {
