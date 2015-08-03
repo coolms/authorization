@@ -12,6 +12,7 @@ namespace CmsAuthorization\View\Strategy;
 
 use Zend\Authentication\AuthenticationServiceInterface,
     Zend\Http\Response as HttpResponse,
+    Zend\Http\Request as HttpRequest,
     Zend\Mvc\MvcEvent,
     CmsAuthorization\Options\ModuleOptionsInterface;
 
@@ -57,7 +58,7 @@ class RedirectStrategy extends UnauthorizedStrategy
      */
     public function onError(MvcEvent $event)
     {
-        if (!($routeMatch = $event->getRouteMatch())) {
+        if (!$event->getRequest() instanceof HttpRequest || !($routeMatch = $event->getRouteMatch())) {
             return;
         }
 
