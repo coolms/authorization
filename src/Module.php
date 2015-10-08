@@ -12,11 +12,15 @@ namespace CmsAuthorization;
 
 use Zend\EventManager\EventInterface,
     Zend\Http\Request as HttpRequest,
+    Zend\Loader\ClassMapAutoloader,
+    Zend\Loader\StandardAutoloader,
     Zend\ModuleManager\Feature\AutoloaderProviderInterface,
     Zend\ModuleManager\Feature\BootstrapListenerInterface,
     Zend\ModuleManager\Feature\ConfigProviderInterface,
     Zend\ModuleManager\Exception\RuntimeException,
-    Zend\ModuleManager\ModuleManager;
+    Zend\ModuleManager\ModuleManager,
+    CmsAuthorization\Options\ModuleOptionsInterface,
+    CmsAuthorization\Options\ModuleOptions;
 
 class Module implements
     AutoloaderProviderInterface,
@@ -40,10 +44,10 @@ class Module implements
     public function getAutoloaderConfig()
     {
         return [
-            'Zend\Loader\ClassMapAutoloader' => [
+            ClassMapAutoloader::class => [
                 __DIR__ . '/../autoload_classmap.php',
             ],
-            'Zend\Loader\StandardAutoloader' => [
+            StandardAutoloader::class => [
                 'fallback_autoloader' => true,
                 'namespaces' => [
                     __NAMESPACE__ => __DIR__,
@@ -73,8 +77,8 @@ class Module implements
         $app = $event->getTarget();
         /* @var $services \Zend\ServiceManager\ServiceLocatorInterface */
         $services = $app->getServiceManager();
-        /* @var $options \CmsAuthorization\Options\ModuleOptionsInterface */
-        $options = $services->get('CmsAuthorization\\Options\\ModuleOptions');
+        /* @var $options ModuleOptionsInterface */
+        $options = $services->get(ModuleOptions::class);
         /* @var $strategy \CmsAuthorization\View\Strategy\AbstractStrategy */
         $strategy = $services->get($options->getUnauthorizedStrategy());
 

@@ -10,8 +10,7 @@
 
 namespace CmsAuthorization\Mapping\Traits;
 
-use Doctrine\Common\Collections\ArrayCollection,
-    Doctrine\Common\Collections\Collection,
+use ArrayObject,
     CmsAuthorization\Mapping\RoleInterface;
 
 /**
@@ -40,7 +39,7 @@ trait RoleableTrait
      */
     public function __construct()
     {
-        $this->roles = new ArrayCollection();
+        $this->roles = new ArrayObject();
     }
 
     /**
@@ -69,7 +68,7 @@ trait RoleableTrait
      */
     public function addRole(RoleInterface $role)
     {
-        $this->getRoles()->add($role);
+        $this->roles[] = $role;
     }
 
     /**
@@ -89,7 +88,11 @@ trait RoleableTrait
      */
     public function removeRole(RoleInterface $role)
     {
-        $this->getRoles()->removeElement($role);
+        foreach ($this->roles as $key => $data) {
+            if ($role === $data) {
+                unset($this->roles[$key]);
+            }
+        }
     }
 
     /**
@@ -97,7 +100,9 @@ trait RoleableTrait
      */
     public function clearRoles()
     {
-        $this->getRoles()->clear();
+        foreach ($this->roles as $role) {
+            $this->removeRole($role);
+        }
     }
 
     /**
@@ -105,13 +110,17 @@ trait RoleableTrait
      */
     public function hasRole(RoleInterface $role)
     {
-        return $this->getRoles()->contains($role);
+        foreach ($this->roles as $data) {
+            if ($role === $data) {
+                return true;
+            }
+        }
     }
 
     /**
      * Get roles
      *
-     * @return Collection
+     * @return RoleInterface[]
      */
     public function getRoles()
     {

@@ -13,6 +13,7 @@ namespace CmsAuthorization\View\Strategy;
 use Zend\Http\Response as HttpResponse,
     Zend\Mvc\MvcEvent,
     Zend\View\Model\ViewModel,
+    CmsPermissions\Identity\ProviderInterface as IdentityProviderInterface,
     CmsAuthorization\Options\ModuleOptionsInterface;
 
 /**
@@ -57,8 +58,8 @@ class UnauthorizedStrategy extends AbstractStrategy
         if (!$event->getParam('identity')) {
             /* @var $services \Zend\ServiceManager\ServiceLocatorInterface */
             $services = $event->getApplication()->getServiceManager();
-            /* @var $provider \CmsPermissions\Identity\ProviderInterface */
-            $provider = $services->get('CmsPermissions\\Identity\\ProviderInterface');
+            /* @var $provider IdentityProviderInterface */
+            $provider = $services->get(IdentityProviderInterface::class);
 
             $model->setVariable('identity', $provider->getIdentity());
         }

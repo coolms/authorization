@@ -12,6 +12,8 @@ namespace CmsAuthorization\Factory\View\Strategy;
 
 use Zend\ServiceManager\FactoryInterface,
     Zend\ServiceManager\ServiceLocatorInterface,
+    CmsAuthorization\Options\ModuleOptionsInterface,
+    CmsAuthorization\Options\ModuleOptions,
     CmsAuthorization\View\Strategy\UnauthorizedStrategy;
 
 class UnauthorizedStrategyFactory implements FactoryInterface
@@ -23,8 +25,8 @@ class UnauthorizedStrategyFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $options \CmsAuthorization\Options\ModuleOptionsInterface */
-        $options = $serviceLocator->get('CmsAuthorization\\Options\\ModuleOptions');
+        /* @var $options ModuleOptionsInterface */
+        $options = $serviceLocator->get(ModuleOptions::class);
         return new UnauthorizedStrategy($options);
     }
 }

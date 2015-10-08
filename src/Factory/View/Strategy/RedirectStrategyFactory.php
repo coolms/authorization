@@ -12,6 +12,9 @@ namespace CmsAuthorization\Factory\View\Strategy;
 
 use Zend\ServiceManager\FactoryInterface,
     Zend\ServiceManager\ServiceLocatorInterface,
+    CmsPermissions\Options\ModuleOptions as PermissionsModuleOptions,
+    CmsAuthorization\Options\ModuleOptionsInterface,
+    CmsAuthorization\Options\ModuleOptions as AuthorizationModuleOptions,
     CmsAuthorization\View\Strategy\RedirectStrategy;
 
 class RedirectStrategyFactory implements FactoryInterface
@@ -23,13 +26,13 @@ class RedirectStrategyFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $options \CmsPermissions\Options\ModuleOptionsInterface */
-        $options = $serviceLocator->get('CmsAuthorization\\Options\\ModuleOptions');
+        /* @var $options ModuleOptionsInterface */
+        $options = $serviceLocator->get(AuthorizationModuleOptions::class);
 
         /* @var $authenticationService \Zend\Authentication\AuthenticationServiceInterface */
         $authenticationService = $serviceLocator->get(
-                $serviceLocator->get('CmsPermissions\\Options\\ModuleOptions')->getAuthenticationService()
-            );
+            $serviceLocator->get(PermissionsModuleOptions::class)->getAuthenticationService()
+        );
 
         return new RedirectStrategy($options, $authenticationService);
     }
