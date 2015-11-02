@@ -53,7 +53,7 @@ class RedirectStrategy extends UnauthorizedStrategy
     /**
      * Handles redirects in case of dispatch errors caused by unauthorized access
      *
-     * @param \Zend\Mvc\MvcEvent $event
+     * @param MvcEvent $event
      * @return void
      */
     public function onError(MvcEvent $event)
