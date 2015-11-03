@@ -20,11 +20,13 @@ interface RoleableInterface extends ProviderInterface, AclRoleInterface
 {
     /**
      * @param RoleInterface[] $roles
+     * @return self
      */
     public function setRoles($roles);
 
     /**
      * @param RoleInterface[] $roles
+     * @return self
      */
     public function addRoles($roles);
 
@@ -32,11 +34,13 @@ interface RoleableInterface extends ProviderInterface, AclRoleInterface
      * Add a role to the user
      *
      * @param RoleInterface $role
+     * @return self
      */
     public function addRole(RoleInterface $role);
 
     /**
      * @param RoleInterface[] $roles
+     * @return self
      */
     public function removeRoles($roles);
 
@@ -44,16 +48,25 @@ interface RoleableInterface extends ProviderInterface, AclRoleInterface
      * Remove a role from the user
      *
      * @param RoleInterface $role
+     * @return self
      */
     public function removeRole(RoleInterface $role);
 
     /**
      * Removes all roles
+     *
+     * @return self
      */
     public function clearRoles();
 
     /**
      * @param RoleInterface $role
+     * @return bool
      */
     public function hasRole(RoleInterface $role);
+
+    /**
+     * @return RoleInterface[]
+     */
+    public function getRoles();
 }

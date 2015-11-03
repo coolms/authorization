@@ -10,8 +10,7 @@
 
 namespace CmsAuthorization\Mapping\Traits;
 
-use ArrayObject,
-    CmsAuthorization\Mapping\RoleInterface;
+use CmsAuthorization\Mapping\RoleInterface;
 
 /**
  * Trait for a roleable entity
@@ -27,8 +26,7 @@ trait RoleableTrait
      *      "empty_option":"User Role",
      *      "target_class":"CmsAuthorization\Mapping\RoleInterface",
      *      "property":"name",
-     *      "is_method":false,
-     *      })
+     *      "is_method":false})
      */
     protected $roles = [];
 
@@ -39,52 +37,64 @@ trait RoleableTrait
      */
     public function __construct()
     {
-        $this->roles = new ArrayObject();
+        
     }
 
     /**
      * @param RoleInterface[] $roles
+     * @return self
      */
     public function setRoles($roles)
     {
         $this->clearRoles();
         $this->addRoles($roles);
+
+        return $this;
     }
 
     /**
      * @param RoleInterface[] $roles
+     * @return self
      */
     public function addRoles($roles)
     {
         foreach ($roles as $role) {
             $this->addRole($role);
         }
+
+        return $this;
     }
 
     /**
      * Add a role to the user
      *
      * @param RoleInterface $role
+     * @return self
      */
     public function addRole(RoleInterface $role)
     {
         $this->roles[] = $role;
+        return $this;
     }
 
     /**
      * @param RoleInterface[] $roles
+     * @return self
      */
     public function removeRoles($roles)
     {
         foreach ($roles as $role) {
             $this->removeRole($role);
         }
+
+        return $this;
     }
 
     /**
      * Remove a role from the user
      *
      * @param RoleInterface $role
+     * @return self
      */
     public function removeRole(RoleInterface $role)
     {
@@ -93,20 +103,27 @@ trait RoleableTrait
                 unset($this->roles[$key]);
             }
         }
+
+        return $this;
     }
 
     /**
      * Removes all roles
+     *
+     * @return self
      */
     public function clearRoles()
     {
         foreach ($this->roles as $role) {
             $this->removeRole($role);
         }
+
+        return $this;
     }
 
     /**
      * @param RoleInterface $role
+     * @return bool
      */
     public function hasRole(RoleInterface $role)
     {
@@ -115,6 +132,8 @@ trait RoleableTrait
                 return true;
             }
         }
+
+        return false;
     }
 
     /**
